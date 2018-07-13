@@ -1,17 +1,23 @@
+from termcolor import colored
 
 class SudokuMap(object):
-	
+
 	def __init__(self, m = None):
 		if m is None:
 			self.map = [[0 for j in range(9)] for i in range(9)]	
 		else:
 			self.map = m
+		self.fix = [[False for j in range(9)] for i in range(9)]
 
 	
-	def draw(self):
+	def draw(self, cursor = [-1,-1]):
 		for i in range(9):
 			for j in range(9):
-				print(self.map[i][j], end='')
+				if [i,j] == cursor:
+					print(colored(self.map[i][j], 'red'), end = '')
+				else:
+					print(self.map[i][j], end='')
+
 				if j == 2 or j == 5:
 					print('|', end = '')
 				else:
@@ -52,6 +58,11 @@ class SudokuMap(object):
 					flags[self.map[i][j] - 1] = True
 
 		return True
+	
+	
+	def change(self, pos, num):
+		if self.fix[pos[0]][pos[1]]: return
+		self.map[pos[0]][pos[1]] = num
 
 
 EXAMPLE_1 = [[(x + 3 * y + y // 3) % 9 + 1 for x in range(9)] for y in range(9)]

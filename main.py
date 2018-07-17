@@ -19,6 +19,7 @@ if __name__ == '__main__':
 	sys.stdout.write('\033[?25l')
 
 	# main loop
+	game_map = newgame()
 	while True:
 		# draw frame
 		os.system('clear')
@@ -47,8 +48,12 @@ if __name__ == '__main__':
 				print("Press any key to continue")
 				getkey()
 			
-		elif '1' <= cmd <= '9':
-			game_map.change(CRUSOR, int(cmd))
+		elif cmd == 'r':
+			game_map.restart()
+
+
+		elif '1' <= cmd <= '9' or cmd == '-':
+			game_map.change(CRUSOR, cmd)
 		else:
 			move(cmd)
 	

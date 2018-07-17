@@ -18,7 +18,7 @@ def getkey():
 
 
 def newgame():	
-	s = SudokuMap(EXAMPLE_1) 
+	s = SudokuMap('example.txt') 
 	return s
 
 
